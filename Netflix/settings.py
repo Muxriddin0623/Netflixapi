@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-$@@+s3dl%j9s76)t2+8++1=2+^_z6)hj*bls9*w8rlr4-18!b!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['netflix.kingburger.uz']
 
 
 # Application definition
