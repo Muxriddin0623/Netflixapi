@@ -18,7 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DJANGO_SETTINGS_MODUL: Netflix.settings
-      AGENT_TOOLSDIRECTORY: /opt/hostedtoolcache
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v4
