@@ -1,0 +1,44 @@
+name: Netflix Api
+
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  run-test:
+    services:
+      postgres:
+        image: postgres:9.6
+        env:
+          POSTGRES_DB: netflixapi
+          POSTGRES_USER: developer
+          POSTGRES_PASSWORD: 3214151
+        ports:
+          - 5432:5432
+
+    runs-on: ubuntu-latest
+    env:
+      DJANGO_SETTINGS_MODUL: Netflix.settings
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install requirements
+        run: pip install -r requirements.txt
+      - name: Run Tests
+        run: pytest
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: netflix.kingburgershop.uz
+          username: root
+          key: ${{ secrets.KEY }}
+          script: |
+            cd Netflixapi
+            git pull
+            systemctl restart gunicorn.service
